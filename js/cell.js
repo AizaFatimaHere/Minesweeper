@@ -9,23 +9,23 @@ class  Cell {
     }
 
     getAdjCells() {
-        var adj = [];
+        var adjacentCells = [];
         var lastRow = board.length - 1;
         var lastCol = board[0].length - 1;
-        if (this.row > 0 && this.col > 0) adj.push(board[this.row - 1][this.col - 1]);
-        if (this.row > 0) adj.push(board[this.row - 1][this.col]);
-        if (this.row > 0 && this.col < lastCol) adj.push(board[this.row - 1][this.col + 1]);
-        if (this.col < lastCol) adj.push(board[this.row][this.col + 1]);
-        if (this.row < lastRow && this.col < lastCol) adj.push(board[this.row + 1][this.col + 1]);
-        if (this.row < lastRow) adj.push(board[this.row + 1][this.col]);
-        if (this.row < lastRow && this.col > 0) adj.push(board[this.row + 1][this.col - 1]);
-        if (this.col > 0) adj.push(board[this.row][this.col - 1]);       
-        return adj;
+        if (this.row > 0 && this.col > 0) adjacentCells.push(board[this.row - 1][this.col - 1]);
+        if (this.row > 0) adjacentCells.push(board[this.row - 1][this.col]);
+        if (this.row > 0 && this.col < lastCol) adjacentCells.push(board[this.row - 1][this.col + 1]);
+        if (this.col < lastCol) adjacentCells.push(board[this.row][this.col + 1]);
+        if (this.row < lastRow && this.col < lastCol) adjacentCells.push(board[this.row + 1][this.col + 1]);
+        if (this.row < lastRow) adjacentCells.push(board[this.row + 1][this.col]);
+        if (this.row < lastRow && this.col > 0) adjacentCells.push(board[this.row + 1][this.col - 1]);
+        if (this.col > 0) adjacentCells.push(board[this.row][this.col - 1]);       
+        return adjacentCells;
     }
 
     calcAdjBombs() {
-        var adjCells = this.getAdjCells();
-        var adjBombs = adjCells.reduce(function(acc, cell) {
+        var nearbyCells = this.getAdjCells();
+        var adjBombs = nearbyCells.reduce(function(acc, cell) {
             return acc + (cell.bomb ? 1 : 0);
         }, 0);
         this.adjBombs = adjBombs;

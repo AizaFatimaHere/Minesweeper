@@ -189,8 +189,8 @@ function getWinner() {
 function render() {
   document.getElementById('bomb-counter').innerText = bombCount.toString().padStart(3, '0');
   var seconds = timeElapsed % 60;
-  var tdList = Array.from(document.querySelectorAll('[data-row]'));
-  tdList.forEach(function(td) {
+  var cellsOnScreen = Array.from(document.querySelectorAll('[data-row]'));
+  cellsOnScreen.forEach(function(td) {
     var rowIdx = parseInt(td.getAttribute('data-row'));
     var colIdx = parseInt(td.getAttribute('data-col'));
     var cell = board[rowIdx][colIdx];
