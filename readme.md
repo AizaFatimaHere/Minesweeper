@@ -4,7 +4,7 @@ A small Minesweeper game with a Windows 95-style interface, built with HTML, CSS
 
 ## Play
 
-[Open the live game](https://aizafatimahere.github.io/minesweeper/)
+[Open the live game](https://aizafatimahere.github.io/Minesweeper/)
 
 ## How to play
 
