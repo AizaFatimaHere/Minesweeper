@@ -19,7 +19,7 @@
 }
 
 body {
-    background-color: #0e8584;
+    background-color: #0D8584;
 }
 
 #board {
@@ -42,7 +42,7 @@ button {
 
 button:hover {
     background-color: lightgray;
-    color: #666;
+    color: slategray;
     cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ button:hover {
 .flex-container {
     display: flex;
     justify-content: center;
-    margin: 76px 10px;
+    margin: 80px 10px;
 }
 
 #folder1 {
@@ -82,7 +82,7 @@ button:hover {
     background-color: #D3CEC4;
     border: none;
     text-align: left;
-    padding: 3px 8px;
+    padding: 2px 8px;
 }
 
 #footer {
@@ -186,7 +186,7 @@ td {
 
 #window-title {
     font-family: 'MS Sans Serif';
-    letter-spacing: .4px;
+    letter-spacing: .5px;
     float: left;
     color: #D5DEF3;
     font-size: 16px;

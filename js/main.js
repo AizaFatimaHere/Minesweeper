@@ -1,7 +1,7 @@
 
-var bombImage = '<img src="images/bomb.png" alt="Bomb">';
-var flagImage = '<img src="images/flag.png" alt="Flag">';
-var wrongBombImage = '<img src="images/wrong-bomb.png" alt="Incorrect flag">'
+var bombImage = '<img src="images/bomb.png">';
+var flagImage = '<img src="images/flag.png">';
+var wrongBombImage = '<img src="images/wrong-bomb.png">'
 var sizeLookup = {
   '9': {totalBombs: 10, tableWidth: '245px'},
   '16': {totalBombs: 40, tableWidth: '420px'},
@@ -80,8 +80,8 @@ function setTimer () {
 };
 
 function revealAll() {
-  board.forEach(function(rowCells) {
-    rowCells.forEach(function(cell) {
+  board.forEach(function(rowArr) {
+    rowArr.forEach(function(cell) {
       cell.reveal();
     });
   });
@@ -122,16 +122,16 @@ function buildTable() {
 }
 
 function buildArrays() {
-  var gridRows = Array(size).fill(null);
-  gridRows = gridRows.map(function() {
+  var arr = Array(size).fill(null);
+  arr = arr.map(function() {
     return new Array(size).fill(null);
   });
-  return gridRows;
+  return arr;
 };
 
 function buildCells(){
-  board.forEach(function(rowCells, rowIdx) {
-    rowCells.forEach(function(slot, colIdx) {
+  board.forEach(function(rowArr, rowIdx) {
+    rowArr.forEach(function(slot, colIdx) {
       board[rowIdx][colIdx] = new Cell(rowIdx, colIdx, board);
     });
   });
@@ -164,14 +164,14 @@ function getBombCount() {
 };
 
 function addBombs() {
-  var bombsLeft = sizeLookup[`${size}`].totalBombs;
-  while (bombsLeft !== 0) {
+  var currentTotalBombs = sizeLookup[`${size}`].totalBombs;
+  while (currentTotalBombs !== 0) {
     var row = Math.floor(Math.random() * size);
     var col = Math.floor(Math.random() * size);
-    var cellAtPosition = board[row][col]
-    if (!cellAtPosition.bomb){
-      cellAtPosition.bomb = true
-      bombsLeft -= 1
+    var currentCell = board[row][col]
+    if (!currentCell.bomb){
+      currentCell.bomb = true
+      currentTotalBombs -= 1
     }
   }
 };
@@ -189,25 +189,25 @@ function getWinner() {
 function render() {
   document.getElementById('bomb-counter').innerText = bombCount.toString().padStart(3, '0');
   var seconds = timeElapsed % 60;
-  var cellsOnScreen = Array.from(document.querySelectorAll('[data-row]'));
-  cellsOnScreen.forEach(function(cellElement) {
-    var rowIdx = parseInt(cellElement.getAttribute('data-row'));
-    var colIdx = parseInt(cellElement.getAttribute('data-col'));
+  var tdList = Array.from(document.querySelectorAll('[data-row]'));
+  tdList.forEach(function(td) {
+    var rowIdx = parseInt(td.getAttribute('data-row'));
+    var colIdx = parseInt(td.getAttribute('data-col'));
     var cell = board[rowIdx][colIdx];
     if (cell.flagged) {
-      cellElement.innerHTML = flagImage;
+      td.innerHTML = flagImage;
     } else if (cell.revealed) {
       if (cell.bomb) {
-        cellElement.innerHTML = bombImage;
+        td.innerHTML = bombImage;
       } else if (cell.adjBombs) {
-        cellElement.className = 'revealed'
-        cellElement.style.color = colors[cell.adjBombs];
-        cellElement.textContent = cell.adjBombs;
+        td.className = 'revealed'
+        td.style.color = colors[cell.adjBombs];
+        td.textContent = cell.adjBombs;
       } else {
-        cellElement.className = 'revealed'
+        td.className = 'revealed'
       }
     } else {
-      cellElement.innerHTML = '';
+      td.innerHTML = '';
     }
   });
   if (hitBomb) {
@@ -224,10 +224,10 @@ function render() {
   }
 };
 
-function runCodeForAllCells(callback) {
-  board.forEach(function(rowCells) {
-    rowCells.forEach(function(cell) {
-      callback(cell);
+function runCodeForAllCells(cb) {
+  board.forEach(function(rowArr) {
+    rowArr.forEach(function(cell) {
+      cb(cell);
     });
   });
 }
