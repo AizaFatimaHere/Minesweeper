@@ -164,14 +164,14 @@ function getBombCount() {
 };
 
 function addBombs() {
-  var currentTotalBombs = sizeLookup[`${size}`].totalBombs;
-  while (currentTotalBombs !== 0) {
+  var bombsLeft = sizeLookup[`${size}`].totalBombs;
+  while (bombsLeft !== 0) {
     var row = Math.floor(Math.random() * size);
     var col = Math.floor(Math.random() * size);
-    var currentCell = board[row][col]
-    if (!currentCell.bomb){
-      currentCell.bomb = true
-      currentTotalBombs -= 1
+    var cellAtPosition = board[row][col]
+    if (!cellAtPosition.bomb){
+      cellAtPosition.bomb = true
+      bombsLeft -= 1
     }
   }
 };
