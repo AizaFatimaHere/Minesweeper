@@ -1,7 +1,7 @@
 
-var bombImage = '<img src="images/bomb.png">';
-var flagImage = '<img src="images/flag.png">';
-var wrongBombImage = '<img src="images/wrong-bomb.png">'
+var bombImage = '<img src="images/bomb.png" alt="Bomb">';
+var flagImage = '<img src="images/flag.png" alt="Flag">';
+var wrongBombImage = '<img src="images/wrong-bomb.png" alt="Incorrect flag">'
 var sizeLookup = {
   '9': {totalBombs: 10, tableWidth: '245px'},
   '16': {totalBombs: 40, tableWidth: '420px'},
