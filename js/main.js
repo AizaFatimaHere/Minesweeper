@@ -190,24 +190,24 @@ function render() {
   document.getElementById('bomb-counter').innerText = bombCount.toString().padStart(3, '0');
   var seconds = timeElapsed % 60;
   var cellsOnScreen = Array.from(document.querySelectorAll('[data-row]'));
-  cellsOnScreen.forEach(function(td) {
-    var rowIdx = parseInt(td.getAttribute('data-row'));
-    var colIdx = parseInt(td.getAttribute('data-col'));
+  cellsOnScreen.forEach(function(cellElement) {
+    var rowIdx = parseInt(cellElement.getAttribute('data-row'));
+    var colIdx = parseInt(cellElement.getAttribute('data-col'));
     var cell = board[rowIdx][colIdx];
     if (cell.flagged) {
-      td.innerHTML = flagImage;
+      cellElement.innerHTML = flagImage;
     } else if (cell.revealed) {
       if (cell.bomb) {
-        td.innerHTML = bombImage;
+        cellElement.innerHTML = bombImage;
       } else if (cell.adjBombs) {
-        td.className = 'revealed'
-        td.style.color = colors[cell.adjBombs];
-        td.textContent = cell.adjBombs;
+        cellElement.className = 'revealed'
+        cellElement.style.color = colors[cell.adjBombs];
+        cellElement.textContent = cell.adjBombs;
       } else {
-        td.className = 'revealed'
+        cellElement.className = 'revealed'
       }
     } else {
-      td.innerHTML = '';
+      cellElement.innerHTML = '';
     }
   });
   if (hitBomb) {
@@ -224,10 +224,10 @@ function render() {
   }
 };
 
-function runCodeForAllCells(cb) {
+function runCodeForAllCells(callback) {
   board.forEach(function(rowCells) {
     rowCells.forEach(function(cell) {
-      cb(cell);
+      callback(cell);
     });
   });
 }
