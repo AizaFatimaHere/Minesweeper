@@ -80,8 +80,8 @@ function setTimer () {
 };
 
 function revealAll() {
-  board.forEach(function(rowArr) {
-    rowArr.forEach(function(cell) {
+  board.forEach(function(rowCells) {
+    rowCells.forEach(function(cell) {
       cell.reveal();
     });
   });
@@ -122,16 +122,16 @@ function buildTable() {
 }
 
 function buildArrays() {
-  var arr = Array(size).fill(null);
-  arr = arr.map(function() {
+  var gridRows = Array(size).fill(null);
+  gridRows = gridRows.map(function() {
     return new Array(size).fill(null);
   });
-  return arr;
+  return gridRows;
 };
 
 function buildCells(){
-  board.forEach(function(rowArr, rowIdx) {
-    rowArr.forEach(function(slot, colIdx) {
+  board.forEach(function(rowCells, rowIdx) {
+    rowCells.forEach(function(slot, colIdx) {
       board[rowIdx][colIdx] = new Cell(rowIdx, colIdx, board);
     });
   });
@@ -225,8 +225,8 @@ function render() {
 };
 
 function runCodeForAllCells(cb) {
-  board.forEach(function(rowArr) {
-    rowArr.forEach(function(cell) {
+  board.forEach(function(rowCells) {
+    rowCells.forEach(function(cell) {
       cb(cell);
     });
   });
